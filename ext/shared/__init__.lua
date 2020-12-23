@@ -1,5 +1,64 @@
+local enlightenGuid = Guid('2422B27D-693F-4B66-A869-C873AF04FE42', 'D')
+local fogGuid = Guid('37D8977A-9D12-445A-8214-757752E02108', 'D')
+local sunFlareGuid = Guid('314DFD9A-C8D6-4249-AE32-92FDD1F5E07C', 'D')
+local characterLightingGuid = Guid('A04E9F4F-463F-4309-87FD-72B71F0DD90B', 'D')
+
 local flashLight1PGuid = Guid('995E49EE-8914-4AFD-8EF5-59125CA8F9CD', 'D')
 local flashLight3PGuid = Guid('5FBA51D6-059F-4284-B5BB-6E20F145C064', 'D')
+
+local function patchEnlighten(instance)
+	if instance == nil then
+		return
+	end
+
+	local enlighten = EnlightenComponentData(instance)
+	enlighten:MakeWritable()
+
+	enlighten.enable = false
+end
+
+local function patchFog(instance)
+	if instance == nil then
+		return
+	end
+
+	local fog = FogComponentData(instance)
+	fog:MakeWritable()
+
+	fog.start = 20
+	fog.endValue = 2500
+
+	fog.enable = false
+	fog.fogColorEnable = false
+end
+
+local function patchSunFlare(instance)
+	if instance == nil then
+		return
+	end
+
+	local sunFlare = SunFlareComponentData(instance)
+	sunFlare:MakeWritable()
+
+	sunFlare.enable = true
+	sunFlare.element1Enable = false
+	sunFlare.element2Enable = false
+	sunFlare.element3Enable = false
+	sunFlare.element4Enable = false
+	sunFlare.element5Enable = false
+end
+
+local function patchCharacterLighting(instance)
+	if instance == nil then
+		return
+	end
+
+	local lighting = CharacterLightingComponentData(instance)
+	lighting:MakeWritable()
+
+	lighting.characterLightEnable = false
+	lighting.topLight = Vec3(0, 0, 0)
+end
 
 local function patchFlashLight(instance)
 	if instance == nil then
@@ -97,6 +156,15 @@ Events:Subscribe('Partition:Loaded', function(partition)
             patchFlashLight(instance)
         elseif instance.instanceGuid == flashLight3PGuid then
             patchFlashLight(instance)
+		elseif instance.instanceGuid == enlightenGuid then
+			patchEnlighten(instance)
+        elseif instance.instanceGuid == fogGuid then
+			patchFog(instance)
+		elseif instance.instanceGuid == sunFlareGuid then
+			patchSunFlare(instance)
+        elseif instance.instanceGuid == characterLightingGuid then
+			patchCharacterLighting(instance)
         end
+
     end
 end)
