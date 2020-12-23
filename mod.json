@@ -1,0 +1,11 @@
+{
+    "Name": "Night Time",
+    "Description": "Changes levels lightning",
+    "Authors": ["Reirei"],
+    "Tags": ["night-time"],
+    "Version": "0.1",
+    "HasVeniceEXT": true,
+    "Dependencies": {
+        "veniceext": "^1.0.0"
+    }
+}
