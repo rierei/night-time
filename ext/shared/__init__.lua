@@ -1,3 +1,24 @@
+local flashLight1PGuid = Guid('995E49EE-8914-4AFD-8EF5-59125CA8F9CD', 'D')
+local flashLight3PGuid = Guid('5FBA51D6-059F-4284-B5BB-6E20F145C064', 'D')
+
+local function patchFlashLight(instance)
+	if instance == nil then
+		return
+	end
+
+	local spotLight = SpotLightEntityData(instance)
+	instance:MakeWritable()
+
+	spotLight.radius = 100
+	spotLight.intensity = 3
+	spotLight.coneOuterAngle = 80
+	spotLight.orthoWidth = 5
+	spotLight.orthoHeight = 5
+	spotLight.frustumFov = 50
+	spotLight.castShadowsEnable = true
+	spotLight.castShadowsMinLevel = QualityLevel.QualityLevel_Low
+end
+
 Events:Subscribe('Partition:Loaded', function(partition)
     for _, instance in pairs(partition.instances) do
         if instance:Is('OutdoorLightComponentData') then
@@ -70,6 +91,12 @@ Events:Subscribe('Partition:Loaded', function(partition)
             flare:MakeWritable()
 
             flare.excluded = true
+        end
+
+        if instance.instanceGuid == flashLight1PGuid then
+            patchFlashLight(instance)
+        elseif instance.instanceGuid == flashLight3PGuid then
+            patchFlashLight(instance)
         end
     end
 end)
