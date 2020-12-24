@@ -91,5 +91,79 @@ Events:Subscribe('Partition:Loaded', function(partition)
 
             flare.excluded = true
         end
+
+        if instance:Is('MeshAsset') then
+            if
+                instance.partition.name:match('mp_011/objects/mp011_backdrop') or
+                instance.partition.name:match('mp_012/terrain/mp012_matte') or
+                instance.partition.name:match('mp_012/objects/smokestacks') or
+                instance.partition.name:match('mp_018/terrain/mp018_matte')
+            then
+                local mesh = MeshAsset(instance)
+                mesh:MakeWritable()
+
+                for _, value in pairs(mesh.materials) do
+                    value:MakeWritable()
+                    value.shader.shader = nil
+                end
+            end
+        end
+
+        if instance:Is('MeshMaterialVariation') then
+            if instance.partition.name:match('mp_012/objects/smokestacks') then
+                local variation = MeshMaterialVariation(instance)
+                variation:MakeWritable()
+                variation.shader.shader = nil
+            end
+        end
+    end
+end)
+
+Hooks:Install('EntityFactory:CreateFromBlueprint', 100, function(context, blueprint, _, _, _)
+    --
+    -- MP_001
+    --
+
+    if
+        blueprint.partition.name:match('mp_subway_smokepillar02') or
+        blueprint.partition.name:match('mp15_smokepillar')
+    then
+        context:Return(nil)
+    end
+
+    --
+    -- MP_007
+    --
+
+    if
+        blueprint.partition.name:match('fx_waramb_battlesmoke') or
+        blueprint.partition.name:match('fx_ambwar_airbursts_background_01') or
+        blueprint.partition.name:match('fx_mp7_battlesmoke_xl') or
+        blueprint.partition.name:match('fx_mp7_distancemist_xxl') or
+        blueprint.partition.name:match('fx_amb_mp_07_godrays')
+    then
+        context:Return(nil)
+    end
+
+    --
+    -- MP_013
+    --
+
+    if
+        blueprint.partition.name:match('fx_amb_mp_013_clouds') or
+        blueprint.partition.name:match('mp013_cloudlayer')
+    then
+        context:Return(nil)
+    end
+
+    --
+    -- MP_018
+    --
+
+    if
+        blueprint.partition.name:match('em_fogarea') or
+        blueprint.partition.name:match('fx_fogarea')
+    then
+        context:Return(nil)
     end
 end)
