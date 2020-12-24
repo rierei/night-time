@@ -63,6 +63,21 @@ Events:Subscribe('Partition:Loaded', function(partition)
             tonemap.tonemapMethod = TonemapMethod.TonemapMethod_FilmicNeutral
         end
 
+        if instance:Is('ColorCorrectionComponentData') then
+            local color = ColorCorrectionComponentData(instance)
+            color:MakeWritable()
+
+            if instance.partition.name:match('menuvisualenvironment') then
+                color.brightness = Vec3(1, 1, 1)
+                color.contrast = Vec3(1, 1, 1)
+                color.saturation = Vec3(0.5, 0.5, 0.5)
+            end
+
+            if instance.partition.name:match('outofcombat') then
+                color.contrast = Vec3(0.9, 0.9, 0.9)
+            end
+        end
+
         if instance:Is('EnlightenComponentData') then
             local enlighten = EnlightenComponentData(instance)
             enlighten:MakeWritable()
