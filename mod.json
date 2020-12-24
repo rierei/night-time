@@ -3,7 +3,7 @@
     "Description": "Changes levels lightning",
     "Authors": ["Reirei"],
     "Tags": ["night-time"],
-    "Version": "0.1",
+    "Version": "0.2",
     "HasVeniceEXT": true,
     "Dependencies": {
         "veniceext": "^1.0.0"
