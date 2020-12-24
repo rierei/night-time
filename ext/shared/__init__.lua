@@ -54,8 +54,13 @@ Events:Subscribe('Partition:Loaded', function(partition)
             local tonemap = TonemapComponentData(instance)
             tonemap:MakeWritable()
 
+            tonemap.minExposure = 2
             tonemap.maxExposure = 4
+
+            tonemap.exposureAdjustTime = 0.5
             tonemap.middleGray = 0.02
+
+            tonemap.tonemapMethod = TonemapMethod.TonemapMethod_FilmicNeutral
         end
 
         if instance:Is('EnlightenComponentData') then
