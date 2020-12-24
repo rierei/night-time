@@ -47,7 +47,7 @@ Events:Subscribe('Partition:Loaded', function(partition)
             local fog = FogComponentData(instance)
             fog:MakeWritable()
 
-            fog.fogColor = Vec3(0.1, 0.1, 0.1)
+            fog.fogColor = Vec3(0.02, 0.02, 0.02)
         end
 
         if instance:Is('TonemapComponentData') then
