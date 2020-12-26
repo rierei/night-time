@@ -94,6 +94,7 @@ Events:Subscribe('Partition:Loaded', function(partition)
 
         if instance:Is('MeshAsset') then
             if
+                instance.partition.name:match('mp_007/terrain/mp007_matte') or
                 instance.partition.name:match('mp_011/objects/mp011_backdrop') or
                 instance.partition.name:match('mp_012/terrain/mp012_matte') or
                 instance.partition.name:match('mp_012/objects/smokestacks') or
