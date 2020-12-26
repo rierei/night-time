@@ -97,7 +97,8 @@ Events:Subscribe('Partition:Loaded', function(partition)
                 instance.partition.name:match('mp_011/objects/mp011_backdrop') or
                 instance.partition.name:match('mp_012/terrain/mp012_matte') or
                 instance.partition.name:match('mp_012/objects/smokestacks') or
-                instance.partition.name:match('mp_018/terrain/mp018_matte')
+                instance.partition.name:match('mp_018/terrain/mp018_matte') or
+                instance.partition.name:match('xp2/objects/godrays_01')
             then
                 local mesh = MeshAsset(instance)
                 mesh:MakeWritable()
@@ -163,6 +164,16 @@ Hooks:Install('EntityFactory:CreateFromBlueprint', 100, function(context, bluepr
     if
         blueprint.partition.name:match('em_fogarea') or
         blueprint.partition.name:match('fx_fogarea')
+    then
+        context:Return(nil)
+    end
+
+    --
+    -- XP4_Rubble
+    --
+
+    if
+        blueprint.partition.name:match('fx_factory_newpart_godrays')
     then
         context:Return(nil)
     end
