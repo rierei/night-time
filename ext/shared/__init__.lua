@@ -188,4 +188,14 @@ Hooks:Install('EntityFactory:CreateFromBlueprint', 100, function(context, bluepr
     then
         context:Return(nil)
     end
+
+    --
+    -- XP4_FD
+    --
+
+    if
+        blueprint.partition.name:match('fx_dlc_xp4_findistrict_godrays')
+    then
+        context:Return(nil)
+    end
 end)
