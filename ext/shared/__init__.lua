@@ -98,7 +98,8 @@ Events:Subscribe('Partition:Loaded', function(partition)
                 instance.partition.name:match('mp_011/objects/mp011_backdrop') or
                 instance.partition.name:match('mp_012/terrain/mp012_matte') or
                 instance.partition.name:match('mp_012/objects/smokestacks') or
-                instance.partition.name:match('mp_018/terrain/mp018_matte')
+                instance.partition.name:match('mp_018/terrain/mp018_matte') or
+                instance.partition.name:match('mp_whitepeak/objects/mountainsidecloud')
             then
                 local mesh = MeshAsset(instance)
                 mesh:MakeWritable()
