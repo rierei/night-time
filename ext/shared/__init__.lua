@@ -178,4 +178,14 @@ Hooks:Install('EntityFactory:CreateFromBlueprint', 100, function(context, bluepr
     then
         context:Return(nil)
     end
+
+    --
+    -- XP4_Parl
+    --
+
+    if
+        blueprint.partition.name:match('fx_dlc_xp4_parliament_godrays') or
+    then
+        context:Return(nil)
+    end
 end)
