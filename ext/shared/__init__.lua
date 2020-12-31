@@ -18,6 +18,8 @@ Events:Subscribe('Partition:Loaded', function(partition)
             PatchMeshAsset(instance)
         elseif instance:Is('MeshMaterialVariation') then
             PatchMeshMaterialVariation(instance)
+        elseif instance:Is('EmitterTemplateData') then
+            PatchEmitterTemplateData(instance)
         end
     end
 end)
@@ -116,9 +118,12 @@ end
 
 function PatchMeshAsset(instance)
     if
+        instance.partition.name:match('mp_subway/objects/backdrops/mp_subway_smokepillar02') or
+        instance.partition.name:match('mp_subway/objects/backdrops/mp15_smokepillarwhite_01') or
         instance.partition.name:match('mp_011/objects/mp011_backdrop') or
         instance.partition.name:match('mp_012/terrain/mp012_matte') or
         instance.partition.name:match('mp_012/objects/smokestacks') or
+        instance.partition.name:match('mp_013/props/mp013_cloudlayer') or
         instance.partition.name:match('mp_018/terrain/mp018_matte')
     then
         local mesh = MeshAsset(instance)
@@ -139,51 +144,32 @@ function PatchMeshMaterialVariation(instance)
     end
 end
 
-Hooks:Install('EntityFactory:CreateFromBlueprint', 100, function(context, blueprint, _, _, _)
-    --
-    -- MP_001
-    --
+function PatchEmitterTemplateData(instance)
 
     if
-        blueprint.partition.name:match('mp_subway_smokepillar02') or
-        blueprint.partition.name:match('mp15_smokepillar')
+        -- MP_Subway
+        instance.partition.name == 'fx/ambient/levelspecific/mp15/emitters/em_amb_mp15_background_smokepillar_m_01' or
+
+        -- MP_007
+        instance.partition.name == 'fx/ambient/levelspecific/mp_07/emitters/em_mp7_distancemist_xxl_smoke' or
+        instance.partition.name == 'fx/ambient/levelspecific/mp_07/emitters/em_mp7_battlesmoke_xl_smoke' or
+        instance.partition.name == 'fx/ambient/levelspecific/mp_07/emitters/em_amb_mp_07_godrays_01' or
+
+        -- MP_013
+        instance.partition.name == 'fx/ambient/levelspecific/mp_013/emitters_clouds/em_amb_mp_013_clouds_area_s_01' or
+        instance.partition.name == 'fx/ambient/levelspecific/mp_013/emitters_clouds/em_amb_mp_013_clouds_background_area_s_01' or
+        instance.partition.name == 'fx/ambient/levelspecific/mp_013/emitters_clouds/em_amb_mp_013_clouds_background_downwards_area_s_01' or
+        instance.partition.name == 'fx/ambient/levelspecific/mp_013/emitters_clouds/em_amb_mp_013_clouds_jumpthrough_01' or
+
+        -- MP_018
+        instance.partition.name == 'levels/mp_018/fx/em_fogarea_smoke_m' or
+        instance.partition.name == 'levels/mp_018/fx/em_fogarea_smoke_xl' or
+        instance.partition.name == 'levels/mp_018/fx/em_fogarea_lowend_smoke_m' or
+        instance.partition.name == 'levels/mp_018/fx/em_fogarea_lowend_smoke_xl'
     then
-        context:Return(nil)
+        local template = EmitterTemplateData(instance)
+        template:MakeWritable()
+
+        template.emissive = false
     end
-
-    --
-    -- MP_007
-    --
-
-    if
-        blueprint.partition.name:match('fx_waramb_battlesmoke') or
-        blueprint.partition.name:match('fx_ambwar_airbursts_background_01') or
-        blueprint.partition.name:match('fx_mp7_battlesmoke_xl') or
-        blueprint.partition.name:match('fx_mp7_distancemist_xxl') or
-        blueprint.partition.name:match('fx_amb_mp_07_godrays')
-    then
-        context:Return(nil)
-    end
-
-    --
-    -- MP_013
-    --
-
-    if
-        blueprint.partition.name:match('fx_amb_mp_013_clouds') or
-        blueprint.partition.name:match('mp013_cloudlayer')
-    then
-        context:Return(nil)
-    end
-
-    --
-    -- MP_018
-    --
-
-    if
-        blueprint.partition.name:match('em_fogarea') or
-        blueprint.partition.name:match('fx_fogarea')
-    then
-        context:Return(nil)
-    end
-end)
+end
