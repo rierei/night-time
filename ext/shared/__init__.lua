@@ -17,7 +17,24 @@ local emitters = {
     ['levels/mp_018/fx/em_fogarea_smoke_m'] = true,
     ['levels/mp_018/fx/em_fogarea_smoke_xl'] = true,
     ['levels/mp_018/fx/em_fogarea_lowend_smoke_m'] = true,
-    ['levels/mp_018/fx/em_fogarea_lowend_smoke_xl'] = true
+    ['levels/mp_018/fx/em_fogarea_lowend_smoke_xl'] = true,
+
+    -- XP1_001
+    ['fx/ambient/levelspecific/sp_03/_emitters/em_amb_sp03_littlewindow_godrays'] = true,
+    ['fx/ambient/levelspecific/sp_03/_emitters/em_amb_sp03_littlewindow_godrays_02'] = true,
+
+    -- XP2_Factory
+    ['fx/dlc/xp2/ambient/levelspecific/mp_factory/emitters/em_factory_newpart_godrays_standalone_rays'] = true,
+
+    -- XP2_Skybar
+    ['fx/dlc/xp2/ambient/levelspecific/mp_skybar/emitters/em_dlc_amb_mpskybar_bgsmog_smoke'] = true,
+
+    -- XP4_FinDistrict
+    ['fx/dlc/xp4/ambient/levelspecific/xp4_findistrict/emitters/em_dlc3_xp4_findistrict_godrays_l'] = true,
+
+    -- XP4_Parliament
+    ['fx/dlc/xp4/ambient/levelspecific/xp4_parliament/emitters/em_dlc_xp4_parliament_godrays_s_rays'] = true,
+    ['fx/dlc/xp4/ambient/levelspecific/xp4_parliament/emitters/em_dlc_xp4_parliament_godrays_xl_rays'] = true,
 }
 
 local meshs = {
@@ -58,12 +75,43 @@ local meshs = {
     -- MP_018
     ['levels/mp_018/terrain/mp018_mattepainting_chunk01_mesh'] = true,
     ['levels/mp_018/terrain/mp018_mattepainting_chunk02_mesh'] = true,
-    ['levels/mp_018/terrain/mp018_mattepainting_chunk03_mesh'] = true
+    ['levels/mp_018/terrain/mp018_mattepainting_chunk03_mesh'] = true,
+
+    -- XP1_001
+    ['levels/xp1_001/objects/mattepainting_01_mesh'] = true,
+    ['levels/xp1_001/objects/mattepainting_02_mesh'] = true,
+    ['levels/xp1_001/objects/mattepainting_03_mesh'] = true,
+    ['levels/xp1_001/objects/mattepainting_04_mesh'] = true,
+
+    -- XP1_004
+    ['xp_raw/surrounding/smokepillars/smokepillar_01_mesh'] = true,
+
+    -- XP2_Skybar
+    ['levels/xp2_skybar/objects/smokepillar_bg/smokepillar_xp2_2_mesh'] = true,
+
+    -- XP3_Alborz
+    ['levels/mp_whitepeak/objects/mountainsidecloud_01_mesh'] = true,
+    ['levels/mp_whitepeak/objects/mountainsidecloud_02_mesh'] = true,
+    ['levels/mp_whitepeak/objects/mountainsidecloud_04_mesh'] = true,
+
+    -- XP3_Desert
+    ['levels/xp3_desert/props/xp3_bandar_backdropmatte_01_mesh'] = true,
+
+    -- XP4_Quake
+    ['levels/sp_valley/terrain/cloud_moving_mesh'] = true
 }
 
 local variations = {
     -- MP_012
-    ['levels/mp_012/objects/smokestacks/smokestack_01_02'] = true
+    ['levels/mp_012/objects/smokestacks/smokestack_01_02'] = true,
+
+    -- XP2_Skybar
+    ['levels/xp2_skybar/objects/smokepillar_bg/smokepillar_01_xp2'] = true,
+
+    -- XP3_Valley
+    ['levels/xp3_valley/objects/mountainsidecloud_01_valley'] = true,
+    ['levels/xp3_valley/objects/mountainsidecloud_02_valley'] = true,
+    ['levels/xp3_valley/objects/mountainsidecloud_04_vvalley'] = true
 }
 
 Events:Subscribe('Partition:Loaded', function(partition)
