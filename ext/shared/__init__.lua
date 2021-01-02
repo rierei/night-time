@@ -5,7 +5,6 @@ local emitters = {
     -- MP_007
     ['fx/ambient/levelspecific/mp_07/emitters/em_mp7_distancemist_xxl_smoke'] = true,
     ['fx/ambient/levelspecific/mp_07/emitters/em_mp7_battlesmoke_xl_smoke'] = true,
-    ['fx/ambient/levelspecific/mp_07/emitters/em_amb_mp_07_godrays_01'] = true,
 
     -- MP_013
     ['fx/ambient/levelspecific/mp_013/emitters_clouds/em_amb_mp_013_clouds_area_s_01'] = true,
@@ -19,22 +18,8 @@ local emitters = {
     ['levels/mp_018/fx/em_fogarea_lowend_smoke_m'] = true,
     ['levels/mp_018/fx/em_fogarea_lowend_smoke_xl'] = true,
 
-    -- XP1_001
-    ['fx/ambient/levelspecific/sp_03/_emitters/em_amb_sp03_littlewindow_godrays'] = true,
-    ['fx/ambient/levelspecific/sp_03/_emitters/em_amb_sp03_littlewindow_godrays_02'] = true,
-
-    -- XP2_Factory
-    ['fx/dlc/xp2/ambient/levelspecific/mp_factory/emitters/em_factory_newpart_godrays_standalone_rays'] = true,
-
     -- XP2_Skybar
     ['fx/dlc/xp2/ambient/levelspecific/mp_skybar/emitters/em_dlc_amb_mpskybar_bgsmog_smoke'] = true,
-
-    -- XP4_FinDistrict
-    ['fx/dlc/xp4/ambient/levelspecific/xp4_findistrict/emitters/em_dlc3_xp4_findistrict_godrays_l'] = true,
-
-    -- XP4_Parliament
-    ['fx/dlc/xp4/ambient/levelspecific/xp4_parliament/emitters/em_dlc_xp4_parliament_godrays_s_rays'] = true,
-    ['fx/dlc/xp4/ambient/levelspecific/xp4_parliament/emitters/em_dlc_xp4_parliament_godrays_xl_rays'] = true,
 }
 
 local meshs = {
@@ -86,6 +71,9 @@ local meshs = {
     -- XP1_004
     ['xp_raw/surrounding/smokepillars/smokepillar_01_mesh'] = true,
 
+    -- XP2_Palace
+    ['xp2/objects/godrays_01/godrays_01_mesh'] = true,
+
     -- XP2_Skybar
     ['levels/xp2_skybar/objects/smokepillar_bg/smokepillar_xp2_2_mesh'] = true,
 
@@ -114,6 +102,35 @@ local variations = {
     ['levels/xp3_valley/objects/mountainsidecloud_04_vvalley'] = true
 }
 
+local effects = {
+    -- MP_007
+    ['fx/ambient/levelspecific/mp_07/fx_amb_mp_07_godrays'] = true,
+
+    -- XP2_Factory
+    ['fx/dlc/xp2/ambient/levelspecific/mp_factory/fx_factory_newpart_godrays_smallwindows'] = true,
+    ['fx/dlc/xp2/ambient/levelspecific/mp_factory/fx_factory_newpart_godrays_standalone'] = true,
+    ['fx/dlc/xp2/ambient/levelspecific/mp_factory/fx_factory_oldpart_godrays_bg'] = true,
+    ['fx/dlc/xp2/ambient/levelspecific/mp_factory/fx_factory_oldpart_godrays_standalone_big'] = true,
+    ['fx/dlc/xp2/ambient/levelspecific/mp_factory/fx_factory_oldpart_godrays_windows'] = true,
+
+    -- XP2_Office
+    ['fx/ambient/levelspecific/sp_villa/fx_amb_sp_villa_inhouse_window_godrays'] = true,
+
+    -- XP2_Palace
+    ['fx/dlc/xp2/ambient/levelspecific/mp_palace/fx_dlc2_mp_palace_godrays'] = true,
+    ['fx/dlc/xp2/ambient/levelspecific/mp_palace/fx_palace_window_godrays'] = true,
+
+    -- XP2_FD
+    ['fx/dlc/xp4/ambient/levelspecific/xp4_findistrict/fx_dlc_xp4_findistrict_godrays_l'] = true,
+
+    -- XP4_Parl
+    ['fx/dlc/xp4/ambient/levelspecific/xp4_parliament/fx_dlc_xp4_parliament_godrays_s'] = true,
+    ['fx/dlc/xp4/ambient/levelspecific/xp4_parliament/fx_dlc_xp4_parliament_godrays_xl'] = true,
+
+    -- XP5_002
+    ['fx/ambient/levelspecific/sp_03/fx_amb_sp03_littlewindow_godrays'] = true,
+}
+
 Events:Subscribe('Partition:Loaded', function(partition)
     for _, instance in pairs(partition.instances) do
         if instance:Is('OutdoorLightComponentData') then
@@ -136,6 +153,8 @@ Events:Subscribe('Partition:Loaded', function(partition)
             PatchMeshMaterialVariation(instance)
         elseif instance:Is('EmitterTemplateData') then
             PatchEmitterTemplateData(instance)
+        elseif instance:Is('EffectEntityData') then
+            PatchEffectEntityData(instance)
         end
     end
 end)
@@ -263,5 +282,14 @@ function PatchEmitterTemplateData(instance)
         template:MakeWritable()
 
         template.emissive = false
+    end
+end
+
+function PatchEffectEntityData(instance)
+    if effects[instance.partition.name] then
+        local effect = EffectEntityData(instance)
+        effect:MakeWritable()
+
+        effect.components:clear()
     end
 end
