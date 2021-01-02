@@ -39,11 +39,14 @@ local meshs = {
     ['levels/mp_007/terrain/mp007_matte_far01_mesh'] = true,
     ['levels/mp_007/terrain/mp007_matte_far02_mesh'] = true,
     ['levels/mp_007/terrain/mp007_matte_far03_mesh'] = true,
+    ['levels/mp_007/props/mp007_waterwash_01_mesh'] = true,
+    ['levels/mp_007/props/mp007_waterwash_02_mesh'] = true,
 
     -- MP_011
     ['levels/mp_011/objects/mp011_backdrop_01_mesh'] = true,
     ['levels/mp_011/objects/mp011_backdropesplanade_01_mesh'] = true,
     ['levels/mp_011/objects/mp011_backdropesplanade_02_mesh'] = true,
+    ['levels/mp_011/water/meshes/mp_011_watersurface01_mesh'] = true,
 
     -- MP_012
     ['levels/mp_012/terrain/mp012_matte_4parts_1_mesh'] = true,
