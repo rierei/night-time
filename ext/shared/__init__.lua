@@ -134,6 +134,12 @@ local effects = {
     ['fx/ambient/levelspecific/sp_03/fx_amb_sp03_littlewindow_godrays'] = true,
 }
 
+local water = {
+    ['Levels/XP1_001/XP1_001'] = true,
+    ['Levels/XP1_002/XP1_002'] = true,
+    ['Levels/XP1_003/XP1_003'] = true,
+}
+
 Events:Subscribe('Partition:Loaded', function(partition)
     for _, instance in pairs(partition.instances) do
         if instance:Is('OutdoorLightComponentData') then
@@ -158,6 +164,19 @@ Events:Subscribe('Partition:Loaded', function(partition)
             PatchEmitterTemplateData(instance)
         elseif instance:Is('EffectEntityData') then
             PatchEffectEntityData(instance)
+        end
+    end
+end)
+
+Events:Subscribe('Level:LoadResources', function(level)
+    local visual = ResourceManager:GetSettings("VisualTerrainSettings")
+
+    if visual ~= nil then
+        visual = VisualTerrainSettings(visual)
+        if water[level] then
+            visual.drawWaterEnable = false
+        else
+            visual.drawWaterEnable = true
         end
     end
 end)
