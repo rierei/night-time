@@ -60,10 +60,14 @@ local meshs = {
     -- MP_013
     ['levels/mp_013/props/mp013_cloudlayer_mesh'] = true,
 
+    -- MP_017
+    ['levels/mp_017/terrain/mp_017_waves_01_mesh'] = true,
+
     -- MP_018
     ['levels/mp_018/terrain/mp018_mattepainting_chunk01_mesh'] = true,
     ['levels/mp_018/terrain/mp018_mattepainting_chunk02_mesh'] = true,
     ['levels/mp_018/terrain/mp018_mattepainting_chunk03_mesh'] = true,
+    ['levels/mp_018/terrain/mp018_wave_01_mesh'] = true,
 
     -- XP1_001
     ['levels/xp1_001/objects/mattepainting_01_mesh'] = true,
@@ -71,8 +75,13 @@ local meshs = {
     ['levels/xp1_001/objects/mattepainting_03_mesh'] = true,
     ['levels/xp1_001/objects/mattepainting_04_mesh'] = true,
 
+    -- XP1_002
+    ['levels/xp1_002/objects/xp1_002__wave_01_mesh'] = true,
+
     -- XP1_004
     ['xp_raw/surrounding/smokepillars/smokepillar_01_mesh'] = true,
+    ['levels/xp1_004/props/wake_wave_02/wake_wave_02_mesh'] = true,
+    ['levels/xp1_004/props/wave_01/wave_01_mesh'] = true,
 
     -- XP2_Palace
     ['xp2/objects/godrays_01/godrays_01_mesh'] = true,
@@ -95,6 +104,9 @@ local meshs = {
 local variations = {
     -- MP_012
     ['levels/mp_012/objects/smokestacks/smokestack_01_02'] = true,
+
+    -- MP_018
+    ['levels/xp1_001/objects/wave_01_xp001'] = true,
 
     -- XP2_Skybar
     ['levels/xp2_skybar/objects/smokepillar_bg/smokepillar_01_xp2'] = true,
