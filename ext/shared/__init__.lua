@@ -146,10 +146,19 @@ local effects = {
     ['fx/ambient/levelspecific/sp_03/fx_amb_sp03_littlewindow_godrays'] = true,
 }
 
-local water = {
+local waters = {
     ['Levels/XP1_001/XP1_001'] = true,
     ['Levels/XP1_002/XP1_002'] = true,
     ['Levels/XP1_003/XP1_003'] = true,
+}
+
+local envmaps = {
+    ['levels/mp_subway/lighting/ve_mp_subway_city_01'] = true,
+    ['levels/mp_011/lighting/ve_mp_011_day01'] = true,
+    ['levels/xp5_001/lighting/ve_xp5_001_01'] = true,
+    ['levels/xp5_002/lighting/ve_xp5_002_01'] = true,
+    ['levels/xp5_003/lighting/ve_xp5_003_01'] = true,
+    ['levels/xp5_004/lighting/ve_xp5_004_02'] = true
 }
 
 Events:Subscribe('Partition:Loaded', function(partition)
@@ -185,7 +194,7 @@ Events:Subscribe('Level:LoadResources', function(level)
 
     if visual ~= nil then
         visual = VisualTerrainSettings(visual)
-        if water[level] then
+        if waters[level] then
             visual.drawWaterEnable = false
         else
             visual.drawWaterEnable = true
@@ -223,10 +232,7 @@ function PatchSkyComponentData(instance)
     sky.staticEnvmapScale = 0.1
     sky.skyEnvmap8BitTexScale = 0.8
 
-    if
-        sky.partition.name == 'levels/mp_subway/lighting/ve_mp_subway_city_01' or
-        sky.partition.name == 'levels/mp_011/lighting/ve_mp_011_day01'
-    then
+    if envmaps[sky.partition.name] then
         sky.staticEnvmapScale = 0.01
     end
 
